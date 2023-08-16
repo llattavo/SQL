@@ -1,0 +1,45 @@
+--create clothing store database
+/**Clothing items sold:
+Men's t-shirts (30) (70)
+Men's shorts (15) (85)
+Men's pants (13) (87)
+Women's t-shirts (22) (78)
+Women's shorts (33) (67)
+Women's pants (14) (86)
+Girls t-shirts (42) (58)
+Girls shorts (32) (68)
+Girls pants (15) (85)
+Boys t-shirts (22) (78)
+boys shorts (20) (80)
+boys pants (15) (85)
+men's shoes (3) (97)
+womens shoes (7) (93)
+girls shoes (10) (90)
+boys shoes (5) (95)
+**/
+
+CREATE TABLE inventory (id INTEGER PRIMARY KEY, type TEXT, price INTEGER, quantity_sold INTEGER, quantity_left INTEGER);
+
+INSERT INTO inventory VALUES (1, "Men's Shirts", 20, 30, 70);
+INSERT INTO inventory VALUES (2, "Men's Shorts", 30, 15, 85);
+INSERT INTO inventory VALUES (3, "Men's Pants", 45, 13, 87);
+INSERT INTO inventory VALUES (4, "Women's Shirts", 20, 22, 78);
+INSERT INTO inventory VALUES (5, "Women's Shorts", 25, 33, 67);
+INSERT INTO inventory VALUES (6, "Women's Pants", 35, 14, 86);
+INSERT INTO inventory VALUES (7, "Girl's Shirts", 10, 42, 58);
+INSERT INTO inventory VALUES (8, "Girl's Shorts", 15, 32, 68);
+INSERT INTO inventory VALUES (9, "Girl's Pants", 25, 15, 85);
+INSERT INTO inventory VALUES (10, "Boy's Shirts", 10, 22, 78);
+INSERT INTO inventory VALUES (11, "Boy's Shorts", 15, 20, 80);
+INSERT INTO inventory VALUES (12, "Boy's Pants", 28, 15, 85);
+INSERT INTO inventory VALUES (13, "Men's Shoes", 95, 3, 97);
+INSERT INTO inventory VALUES (14, "Women's Shoes", 90, 7, 93);
+INSERT INTO inventory VALUES (15, "Girl's Shoes", 45, 10, 90);
+INSERT INTO inventory VALUES (16, "Boy's Shoes", 45, 5, 95);
+SELECT * FROM inventory;
+
+--list items by price
+SELECT * FROM inventory ORDER BY price;
+
+--what items need to be have an inventory less than 80? 
+SELECT * FROM inventory WHERE quantity_left < 80 GROUP BY type;
