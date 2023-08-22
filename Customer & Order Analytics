@@ -1,14 +1,21 @@
+#In this SQL, I'm querying a database with multiple tables in it to quantify statistics about customer and order data. 
+
+
 SELECT * FROM BIT_DB.customers LIMIT 20;
 SELECT * FROM BIT_DB.customers LIMIT 20;
+
+#1. How many orders were placed in January? 
 SELECT * FROM BIT_DB.JanSales LIMIT 20;
 SELECT * FROM BIT_DB.customers;
 SELECT * FROM BIT_DB.FebSales LIMIT 5;
 
+#2. How many of those orders were for an iPhone? 
 SELECT COUNT(orderID) FROM BIT_DB.JanSales
     WHERE length(orderID) = 6
 AND orderID <> 'Order ID'
 AND Product = "iPhone";
 
+#3. Select the customer account numbers for all the orders that were placed in February. 
 SELECT acctnum
     FROM BIT_DB.customers
     JOIN BIT_DB.FebSales
@@ -16,6 +23,7 @@ SELECT acctnum
         WHERE length(orderID) = 6
 AND orderID <> 'Order ID';
 
+#4. Which product was the cheapest one sold in January, and what was the price? 
 SELECT product, price 
     FROM BIT_DB.JanSales
         HAVING MIN(price)
@@ -25,17 +33,18 @@ SELECT distinct product, price
 FROM BIT_DB.JanSales 
 ORDER BY price ASC LIMIT 1;
 
+#5. What is the total revenue for each product sold in January?
 SELECT DISTINCT product, SUM(quantity)*price as revenue
     FROM BIT_DB.JanSales
     GROUP BY product;
 
+#6. Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
 SELECT product, SUM(quantity), SUM(quantity)*price as revenue
     FROM BIT_DB.FebSales Feb
     WHERE location="548 Lincoln St, Seattle, WA 98101"
     GROUP BY product;
     
-
-    
+#7. How many customers ordered more than 2 products at a time, and what was the average amount spent for those customers?     
 select 
 count(distinct cust.acctnum), 
 avg(quantity*price)
